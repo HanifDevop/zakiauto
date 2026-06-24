@@ -176,13 +176,51 @@
   .scroll-hint { display:none; }
   .services-strip { padding:40px 24px; }
 }
+
+/* ── MOBILE NAV (NEW) ── */
+.hamburger {
+  display:none;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:26px;
+  cursor:pointer;
+  z-index:1001;
+}
+
+@media (max-width:768px) {
+  nav { position:relative; flex-wrap:wrap; }
+
+  .hamburger { display:block; }
+
+  .nav-cta { display:none; }
+
+  .nav-links {
+    display:none;
+    flex-direction:column;
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:#0a0a0a;
+    border-top:1px solid var(--border);
+    padding:16px 6vw;
+    gap:16px;
+    z-index:1000;
+  }
+
+  .nav-links.show { display:flex; }
+
+  .nav-links li { width:100%; text-align:left; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">ZAKI <span>AUTO</span></a>
-  <ul class="nav-links">
+  <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="cars.html">Inventory</a></li>
     <li><a href="services.html">Services</a></li>
@@ -360,5 +398,14 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+</script>
 </body>
 </html>
